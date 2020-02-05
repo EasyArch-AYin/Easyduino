@@ -11,7 +11,6 @@ public class AcceptHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg){
         ByteBuf byteBuf = (ByteBuf) msg;
         System.out.println("有客户端连接了,发送的信息是：" + byteBuf.toString(CharsetUtil.UTF_8));
-        new FileSend(ctx,msg);
     }
 
     @Override
