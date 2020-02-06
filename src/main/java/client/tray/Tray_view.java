@@ -5,13 +5,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Tray_view {
+        static final JFrame frame = new JFrame("TrayTest");
     public Tray_view(){
-        final JFrame frame = new JFrame("TrayTest");
+
         frame.setBounds(320,150,1280, 720);
-        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE); // 点击关闭按钮时隐藏窗口
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
+        //点击退出时弹出选择窗口
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -19,9 +20,10 @@ public class Tray_view {
             }
         });
 
+        //添加托盘
         if (SystemTray.isSupported()){
             // 获取当前平台的系统托盘
-            SystemTray tray = SystemTray.getSystemTray();
+            final SystemTray tray = SystemTray.getSystemTray();
             // 加载一个图片用于托盘图标的显示
             Image image = Toolkit.getDefaultToolkit().getImage("C:\\Users\\11578\\IdeaProjects\\Easyduino\\src\\main\\resources\\wy.png");
 
@@ -33,7 +35,7 @@ public class Tray_view {
             popupMenu.add(exitItem);
 
             // 创建一个托盘图标
-            TrayIcon trayIcon = new TrayIcon(image,"托盘",popupMenu);
+            final TrayIcon trayIcon = new TrayIcon(image,"托盘",popupMenu);
             // 托盘图标自适应尺寸
             trayIcon.setImageAutoSize(true);
 
@@ -45,46 +47,28 @@ public class Tray_view {
                 }
             });
 
-            // 创建点击图标时的弹出菜单
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // 创建点击图标时的弹出菜单
-                    if (!frame.isShowing()){
-                        frame.setVisible(true);
-                    }
-                }
-            });
-
-            trayIcon.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    switch (e.getButton()){
-                        case MouseEvent.BUTTON1:{
-                            System.out.println("托盘被鼠标左键点击");
-                            break;
-                        }
-                        case MouseEvent.BUTTON2:{
-                            System.out.println("托盘被鼠标中键点击");
-                            break;
-                        }
-                        case MouseEvent.BUTTON3:{
-                            System.out.println("托盘被鼠标右键点击");
-                            break;
-                        }
-                    }
+                    //点击打开时弹出界面
+                    frame.setVisible(true);
                 }
             });
 
             // 添加托盘图标到系统托盘
             try {
                 tray.add(trayIcon);
-            } catch (AWTException e) {
-                e.printStackTrace();
+            } catch (AWTException ex) {
+                ex.printStackTrace();
             }
         }else {
             System.out.println("当前系统不支持系统托盘");
         }
+
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Tray_view();
     }
 }

@@ -1,18 +1,15 @@
 package client.tray;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Tray_Login {
     public static void main(String[] args) {
 
         final JFrame frame = new JFrame("TrayTest");
         frame.setBounds(320,150,1280, 720);
-        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE); // 点击关闭按钮时隐藏窗口
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // 点击关闭按钮时隐藏窗口
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
@@ -38,6 +35,7 @@ public class Tray_Login {
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //加登录验证
                 new Tray_view();
                 frame.setVisible(false);
             }
