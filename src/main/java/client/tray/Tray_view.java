@@ -2,7 +2,12 @@ package client.tray;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.URI;
 
 public class Tray_view {
         static final JFrame frame = new JFrame("TrayTest");
@@ -11,6 +16,9 @@ public class Tray_view {
         frame.setBounds(320,150,1280, 720);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
+
+        JButton StartGame = new JButton("开始游戏");
+        StartGame.setBounds(600,570,150,60);
 
         //点击退出时弹出选择窗口
         frame.addWindowListener(new WindowAdapter() {
@@ -64,6 +72,20 @@ public class Tray_view {
         }else {
             System.out.println("当前系统不支持系统托盘");
         }
+
+        StartGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://feeds.qq.com/?ADTAG=bkmark"));
+//                  Desktop.getDesktop().open(new File("C:\\Users\\11578\\IdeaProjects\\Easyduino\\src\\main\\java\\client\\tray\\test.html"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        frame.add(StartGame);
 
         frame.setVisible(true);
     }
