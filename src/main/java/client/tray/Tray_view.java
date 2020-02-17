@@ -2,10 +2,7 @@ package client.tray;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
 
@@ -19,6 +16,14 @@ public class Tray_view {
 
         JButton StartGame = new JButton("开始游戏");
         StartGame.setBounds(600,570,150,60);
+
+        JTextField FRIEND = new JTextField("请输入id");
+        FRIEND.setBounds(0,0,260,40);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(BorderFactory.createEtchedBorder());
+        panel.setBounds(1000,200,260,420);
 
         //点击退出时弹出选择窗口
         frame.addWindowListener(new WindowAdapter() {
@@ -77,7 +82,7 @@ public class Tray_view {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Desktop.getDesktop().browse(URI.create("https://feeds.qq.com/?ADTAG=bkmark"));
+                    Desktop.getDesktop().browse(URI.create("https://scratch.mit.edu/"));
 //                  Desktop.getDesktop().open(new File("C:\\Users\\11578\\IdeaProjects\\Easyduino\\src\\main\\java\\client\\tray\\test.html"));
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -85,6 +90,25 @@ public class Tray_view {
             }
         });
 
+        FRIEND.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10){
+                    //在库中查找有无此人的id，有则添加好友，无则返回没有
+                    if (true){
+                        //弹出添加好友窗口
+                        String ID = FRIEND.getText();
+                        new AddFriend(ID);
+                    }else {
+                        //弹出无此人窗口
+                        new NoFriend();
+                    }
+                }
+            }
+        });
+
+        panel.add(FRIEND);
+        frame.add(panel);
         frame.add(StartGame);
 
         frame.setVisible(true);

@@ -13,27 +13,33 @@ public class Tray_Login {
         frame.setLocationRelativeTo(null);
 
         JButton LOGIN = new JButton("立即登录");
-        LOGIN.setBounds(820,425 ,320,60);
+        LOGIN.setBounds(20,245 ,320,60);
         JButton REGIST = new JButton("点我注册");
-        REGIST.setBounds(820,380,100,20);
+        REGIST.setBounds(20,200,100,20);
 
         JLabel ACCOUNT = new JLabel("账号");
-        ACCOUNT.setBounds(820,200,40,20);
+        ACCOUNT.setBounds(20,20,40,20);
         JLabel PASSWORD = new JLabel("密码");
-        PASSWORD.setBounds(820,300,40,20);
+        PASSWORD.setBounds(20,120,40,20);
 
 
         final JTextField jtf = new JTextField();
         final JPasswordField jpf = new JPasswordField();
-        jtf.setBounds(820,220,320,40);
-        jpf.setBounds(820,320,320,40);
+        jtf.setBounds(20,40,320,40);
+        jpf.setBounds(20,140,320,40);
 
-        frame.add(LOGIN);
-        frame.add(REGIST);
-        frame.add(ACCOUNT);
-        frame.add(PASSWORD);
-        frame.add(jtf);
-        frame.add(jpf);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(BorderFactory.createEtchedBorder());
+        panel.setBounds(800,180,360,340);
+
+        panel.add(LOGIN);
+        panel.add(REGIST);
+        panel.add(ACCOUNT);
+        panel.add(PASSWORD);
+        panel.add(jtf);
+        panel.add(jpf);
+        frame.add(panel);
 
         LOGIN.addActionListener(new ActionListener() {
             @Override

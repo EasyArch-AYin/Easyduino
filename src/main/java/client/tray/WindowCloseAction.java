@@ -1,30 +1,45 @@
 package client.tray;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class WindowCloseAction {
         private final JFrame frame = new JFrame("TrayTest");
     public WindowCloseAction() {
 
         frame.setSize(300, 300);
-        frame.setLayout(new GridLayout(3, 3));
+        frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
         //添加单选按钮
         final JRadioButton TRAY = new JRadioButton("最小化到托盘");
         final JRadioButton CLOSE = new JRadioButton("退出程序");
 
+        TRAY.setBounds(80,60,200,20);
+        CLOSE.setBounds(80,110,200,20);
+
         //添加按钮组并将两个单选按钮加入按钮组
         JButton jButton = new JButton("确定");
+        jButton.setBounds(100,180,100,40);
         ButtonGroup group = new ButtonGroup();
         group.add(TRAY);
         group.add(CLOSE);
 
-        frame.add(TRAY);
-        frame.add(CLOSE);
-        frame.add(jButton);
+        JPanel panel = new JPanel();
+        panel.setBounds(0,0,300,300);
+        panel.setBorder(BorderFactory.createLoweredBevelBorder());
+        panel.setLayout(null);
+
+        panel.add(TRAY);
+        panel.add(CLOSE);
+        panel.add(jButton);
+
+        frame.add(panel);
+//        frame.add(CLOSE);
+//        frame.add(jButton);
 
         //添加关闭窗口的事件
         frame.addWindowListener(new WindowAdapter() {
