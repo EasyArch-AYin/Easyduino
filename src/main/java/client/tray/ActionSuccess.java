@@ -3,7 +3,9 @@ package client.tray;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * 操作成功页面
+ */
 public class ActionSuccess {
     ActionSuccess(){
         final JFrame frame = new JFrame("TrayTest");

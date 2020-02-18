@@ -1,7 +1,11 @@
 package client.tray;
 
 import javax.swing.*;
-
+/**
+ * 添加玩家（好友？）
+ *
+ * 页面只有一个页面和一个框，其他啥都看不见，是不是错了？
+ */
 public class AddFriend {
     AddFriend(String ID){
         final JFrame frame = new JFrame("TrayTest");
