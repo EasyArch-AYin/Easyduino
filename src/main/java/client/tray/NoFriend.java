@@ -1,7 +1,9 @@
 package client.tray;
 
 import javax.swing.*;
-
+/**
+ * 查无此人页面
+ */
 public class NoFriend {
     NoFriend(){
         final JFrame frame = new JFrame("TrayTest");
