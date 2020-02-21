@@ -2,6 +2,7 @@ package client.dataClient;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
@@ -20,5 +21,9 @@ public class DataClientHanler extends SimpleChannelInboundHandler<DatagramPacket
     protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
         ByteBuf byteBuf =msg.content();
         System.out.println("服务器发送的消息是： " + byteBuf.toString(CharsetUtil.UTF_8));
+    }
+
+    public void xxx(Channel ch){
+        ch.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",CharsetUtil.UTF_8),new InetSocketAddress("127.0.0.1",8087)));
     }
 }
