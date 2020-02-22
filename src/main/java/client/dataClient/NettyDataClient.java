@@ -13,7 +13,9 @@ public class NettyDataClient {
     private EventLoopGroup group;
     private Bootstrap bootstrap;
     private Channel channel;
-    public Channel run(int PORT){
+
+    //netty运行
+    public void run(int PORT){
 
         group = new NioEventLoopGroup();
 
@@ -27,17 +29,21 @@ public class NettyDataClient {
 
 
         try {
-            channel = bootstrap.bind(PORT).sync().channel();
-//            channel.closeFuture().await();
+            this.channel = bootstrap.bind(PORT).sync().channel();
+            this.channel.closeFuture().await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
             group.shutdownGracefully();
         }
         System.out.println("客户端启动成功");
-            return channel;
 
     }
+    //得到channel用于传输数据
+    public Channel getChannel(){
+        return this.channel;
+    }
+
     public static void main(String[] args){
         NettyDataClient Data = new NettyDataClient();
         Data.run(0);

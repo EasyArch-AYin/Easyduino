@@ -1,16 +1,19 @@
 package client.tray;
 
-import client.dataClient.DataClientHanler;
-import io.netty.channel.Channel;
+import client.dataClient.NettyDataClient;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.socket.DatagramPacket;
+import io.netty.util.CharsetUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.InetSocketAddress;
 
 public class AddFriend {
-    AddFriend(Channel channel,String ID){
+    AddFriend(NettyDataClient DataClient,String MyID, String ID){
         final JFrame frame = new JFrame("TrayTest");
         frame.setBounds(800,400,400, 350);
         frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE); // 点击关闭按钮时隐藏窗口
@@ -20,7 +23,7 @@ public class AddFriend {
         JButton ADD = new JButton("添加");
         ADD.setBounds(300,15,60,20);
 
-        JLabel FriendID = new JLabel("好友ID" + ID);
+        JLabel FriendID = new JLabel("好友ID:" + ID);
         FriendID.setBounds(80,10,200,25);
 
         JPanel panel = new JPanel();
@@ -39,8 +42,9 @@ public class AddFriend {
 
         ADD.addActionListener(new ActionListener() {
             @Override
+            //给服务器发送申请人ID和被申请人ID
             public void actionPerformed(ActionEvent e) {
-                new DataClientHanler().xxx(channel);
+                DataClient.getChannel().writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(MyID+ "+" + ID, CharsetUtil.UTF_8),new InetSocketAddress("127.0.0.1",8087)));
             }
         });
 

@@ -7,18 +7,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
-import java.nio.channels.Channel;
 
 public class Tray_view {
     static final JFrame frame = new JFrame("TrayTest");
-    Channel channel = (Channel) new NettyDataClient().run(0);
-    Tray_view(){
-        //打开界面和启动托盘
-        view();
+    NettyDataClient DataClient = new NettyDataClient();
 
+    Tray_view(String MyID){
+        //打开界面和启动托盘
+        view(MyID);
+        //启动netty
+        DataClient.run(0);
     }
 
-    public void view(){
+    public void view(String MyID){
         frame.setBounds(320,150,1280, 720);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
@@ -86,6 +87,9 @@ public class Tray_view {
         }else {
             System.out.println("当前系统不支持系统托盘");
         }
+
+        frame.setVisible(true);
+
         //开始游戏
         StartGame.addActionListener(new ActionListener() {
             @Override
@@ -107,7 +111,8 @@ public class Tray_view {
                     if (true){
                         //弹出添加好友窗口
                         String ID = FRIEND.getText();
-                        new AddFriend((io.netty.channel.Channel) channel,ID);
+                        //传入参数netty对象，申请人ID，被申请人ID
+                        new AddFriend(DataClient,MyID,ID);
                     }else {
                         //弹出无此人窗口
                         new NoFriend();
@@ -120,11 +125,12 @@ public class Tray_view {
         frame.add(panel);
         frame.add(StartGame);
 
-        frame.setVisible(true);
+
+
 
     }
 
     public static void main(String[] args) {
-        new Tray_view();
+        new Tray_view("12345678911");
     }
 }

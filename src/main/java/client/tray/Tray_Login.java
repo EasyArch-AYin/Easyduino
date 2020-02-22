@@ -45,7 +45,7 @@ public class Tray_Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //加登录验证
-                new Tray_view();
+                new Tray_view(ACCOUNT.getText());
                 frame.setVisible(false);
             }
         });
