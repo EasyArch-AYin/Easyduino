@@ -18,16 +18,12 @@ public class NettyDataClient {
     public void run(int PORT){
 
         group = new NioEventLoopGroup();
-
         bootstrap = new Bootstrap();
 
         bootstrap.group(group)
                 .channel(NioDatagramChannel.class)
                 .option(ChannelOption.SO_BROADCAST,true)
                 .handler(new DataClientHanler());
-
-
-
         try {
             this.channel = bootstrap.bind(PORT).sync().channel();
             this.channel.closeFuture().await();
