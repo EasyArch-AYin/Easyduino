@@ -1,6 +1,8 @@
 package client.tray;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NoFriend {
     NoFriend(){
@@ -18,6 +20,13 @@ public class NoFriend {
 
         frame.add(jLabel);
         frame.add(CONFIRM);
+
+        CONFIRM.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+            }
+        });
 
         frame.setVisible(true);
     }
