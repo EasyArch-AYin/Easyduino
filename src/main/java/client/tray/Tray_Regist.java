@@ -39,11 +39,6 @@ class Tray_Regist {
                 frame.setVisible(false);
             }
         });
-
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Tray_Regist();
     }
 }
