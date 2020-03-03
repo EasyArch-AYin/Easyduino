@@ -25,7 +25,6 @@ public class DataServerHandler extends SimpleChannelInboundHandler<DatagramPacke
         //回复信息
         ctx.channel().writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("服务器接收到了你的消息",CharsetUtil.UTF_8),msg.sender()));
     }
-
     //获取客户端端口
     public int getPort(){
         return this.port;
